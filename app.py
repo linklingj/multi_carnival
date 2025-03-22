@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO, emit, join_room
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret'
@@ -27,6 +27,14 @@ def handle_connect():
 def handle_disconnect():
     print('Client Disconnected')
 
+@socketio.on('join_room')
+def handle_join_room(data):
+    room = data.get('room')
+    user = data.get('user_name')
+
+    print(user + ' Joined Room')
+    join_room(room)
+
 @socketio.on('move_input')
 def handle_move_input(data):
     """
@@ -37,6 +45,8 @@ def handle_move_input(data):
     input_btn = data.get('input_btn', '')
 
     print(f"[Server] input from {user_name}: {input_btn}")
+
+    socketio.emit('unity_input', data, room = 'game_room')
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000)
