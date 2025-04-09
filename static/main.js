@@ -1,4 +1,4 @@
-const socket = io();
+const socket = io("http://54.180.77.228:8000");
 const COOLDOWN = 3; //s
 
 const user_id = Math.random().toString(36).substr(2, 8);
