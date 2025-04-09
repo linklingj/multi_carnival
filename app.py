@@ -37,7 +37,7 @@ def handle_disconnect():
     sid = request.sid
     user = clients.pop(sid, None)
 
-    print(f"Client Disconnected: {user}")
+    print(f"Client Disconnected: {user['user_name']}")
 
 @socketio.on('join_room')
 def handle_join_room(data):
@@ -61,4 +61,4 @@ def handle_move_input(data):
     socketio.emit('unity_input', data, room = 'game_room')
 
 if __name__ == "__main__":
-    socketio.run(host="0.0.0.0", port=8000)
+    socketio.run(app, host="0.0.0.0", port=8000, allow_unsafe_werkzeug=True)
