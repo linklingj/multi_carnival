@@ -4,6 +4,7 @@ from flask_socketio import SocketIO, emit, join_room
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret'
 socketio = SocketIO(app)
+clients = {}
 
 @app.route("/")
 def login():
@@ -21,19 +22,30 @@ def index():
 
 @socketio.on('connect')
 def handle_connect():
-    print('Client Connected')
+    user_name = request.args.get('user_name', 'anonymous')
+    if user_name == "UNITY":
+        return
+    sid = request.sid
+    clients[sid] = {'user_name': user_name}
+
+    print(f"Client Connected: {user_name}")
+
+    socketio.emit('users_info', clients, room = 'game_room')
 
 @socketio.on('disconnect')
 def handle_disconnect():
-    print('Client Disconnected')
+    sid = request.sid
+    user = clients.pop(sid, None)
+
+    print(f"Client Disconnected: {user}")
 
 @socketio.on('join_room')
 def handle_join_room(data):
     room = data.get('room')
     user = data.get('user_name')
 
-    print(user + ' Joined Room')
     join_room(room)
+    print(user + ' Joined Room')
 
 @socketio.on('move_input')
 def handle_move_input(data):
