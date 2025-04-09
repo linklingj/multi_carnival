@@ -1,7 +1,11 @@
-const socket = io();
 const COOLDOWN = 3; //s
 
 const user_id = Math.random().toString(36).substr(2, 8);
+const username = document.getElementById('welcome').dataset.username;
+
+const socket = io({
+    query: {user_name: username}
+});
 
 let canPress = true;
 
@@ -29,11 +33,10 @@ function sendInput(input_btn) {
     if (!canPress) return;
 
     socket.emit('move_input', {
-        user_name: "{{user_name}}",
+        user_name: username,
         user_id: user_id,
         input_btn: input_btn
     });
-    console.log(input_btn);
 
     startCooldown();
 }
