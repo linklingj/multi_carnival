@@ -61,4 +61,4 @@ def handle_move_input(data):
     socketio.emit('unity_input', data, room = 'game_room')
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
+    socketio.run(host="0.0.0.0", port=8000)

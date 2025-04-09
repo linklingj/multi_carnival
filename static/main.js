@@ -1,7 +1,5 @@
-<<<<<<< HEAD
+
 const socket = io("http://54.180.77.228:8000");
-=======
->>>>>>> bbbdc30371fa2d83daeb0ee067d84e36872d54f7
 const COOLDOWN = 3; //s
 
 const user_id = Math.random().toString(36).substr(2, 8);
