@@ -1,33 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi Carnival</title>
-    <link rel="stylesheet" href="../static/style.css">
-    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js" integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous"></script>     
-</head>
-<body>
-    <h1>게임 조작</h1>
-    <p id="welcome" data-username={{username}}>{{username}}님 안녕하세요</p>
-  <div class="arrow-container">
-    <button class="button" id="up">▲</button>
-    <button class="button" id="left">◀</button>
-    <button class="button" id="right">▶</button>
-    <button class="button" id="down">▼</button>
-  </div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <title>Multi Carnival</title>
+        <link rel="stylesheet" href="../static/style.css" />
+        <script
+            src="https://cdn.socket.io/4.8.1/socket.io.min.js"
+            integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+"
+            crossorigin="anonymous"
+        ></script>
+    </head>
+    <body>
+        <h1>게임 조작</h1>
+        <p id="welcome" data-username="{{username}}">
+            {{username}}님 안녕하세요
+        </p>
+        <p id="role" data-role="{{role}}">
+            당신이 조작할 수 있는 버튼은 {{role}}버튼 입니다
+        </p>
 
-  <div class="button-container">
-    <button class="box" id="interact">상호작용</button>
-    <button class="box" id="attack">공격</button>
-    <button class="box" id="dash">대쉬</button>
-    <button class="box" id="special">특수</button>
-  </div>
+        <div class="my">
+            <button class="button" id="my">my</button>
+        </div>
 
-  <div class="slider-container">
-    <input type="range" id="cooldownSlider" min="0" max="1" step="0.01" value="0" disabled>
-  </div>
+        <div class="all" style="display: none">
+            <div class="arrow-container">
+                <button class="button" id="up">▲</button>
+                <button class="button" id="left">◀</button>
+                <button class="button" id="right">▶</button>
+                <button class="button" id="down">▼</button>
+            </div>
+    
+            <div class="button-container">
+                <button class="box" id="interact">상호작용</button>
+                <button class="box" id="attack">공격</button>
+                <button class="box" id="dash">대쉬</button>
+                <button class="box" id="special">특수</button>
+            </div>
+        </div>
 
-  <script src="../static/main.js"></script>
-</body>
+        <div class="slider-container" style="display: none">
+            <input
+                type="range"
+                id="cooldownSlider"
+                min="0"
+                max="1"
+                step="0.01"
+                value="0"
+                disabled
+            />
+        </div>
+
+        <script src="../static/main.js"></script>
+    </body>
 </html>

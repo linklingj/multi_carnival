@@ -4,6 +4,7 @@ const COOLDOWN = 3; //s
 
 const user_id = Math.random().toString(36).substr(2, 8);
 const username = document.getElementById('welcome').dataset.username;
+const role = document.getElementById('role').dataset.role;
 
 const socket = io({
     query: {user_name: username}
@@ -11,6 +12,7 @@ const socket = io({
 
 let canPress = true;
 
+const my = document.getElementById('my');
 const up = document.getElementById('up');
 const left = document.getElementById('left');
 const right = document.getElementById('right');
@@ -22,6 +24,12 @@ const special = document.getElementById('special');
 
 const slider = document.getElementById('cooldownSlider');
 
+
+my.addEventListener('mousedown', () => sendInput(role, 'down'));
+my.addEventListener('touchstart', () => sendInput(role, 'down'));
+my.addEventListener('mouseup', () => sendInput(role, 'up'));
+my.addEventListener('touchend', () => sendInput(role, 'up'));
+
 up.addEventListener('click', () => sendInput('up'));
 left.addEventListener('click', () => sendInput('left'));
 right.addEventListener('click', () => sendInput('right'));
@@ -31,17 +39,46 @@ attack.addEventListener('click', () => sendInput('attack'));
 dash.addEventListener('click', () => sendInput('dash'));
 special.addEventListener('click', () => sendInput('special'));
 
-function sendInput(input_btn) {
+function sendInput(input_btn, type='click') {
     if (!canPress) return;
 
     socket.emit('move_input', {
         user_name: username,
         user_id: user_id,
-        input_btn: input_btn
+        input_btn: input_btn,
+        btn_type: type
     });
 
-    startCooldown();
+    //startCooldown();
 }
+
+
+const myDiv = document.querySelector('.my');
+const allDiv = document.querySelector('.all');
+
+if (role === 'all') {
+    myDiv.style.display = 'none';
+    allDiv.style.display = 'block';
+} else {
+    myDiv.style.display = 'block';
+    allDiv.style.display = 'none';
+    t = ''
+    if (role === 'up')
+        t = '▲'
+    if (role === 'left')
+        t = '◀'
+    if (role === 'down')
+        t = '▼'
+    if (role === 'right')
+        t = '▶'
+    if (role === 'attack')
+        t = '공격'
+    if (role === 'dash')
+        t = '대쉬'
+    
+    my.innerText = t
+}
+
 
 function startCooldown() {
     canPress = false;

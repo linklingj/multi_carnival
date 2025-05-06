@@ -18,6 +18,13 @@ body {
     margin-top: 40px;
 }
 
+.all {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 /* 가운데에 Up/Down/Left/Right 버튼을 놓는 방법 */
 /* (r2c2 = 가운데), 여기에 아무것도 두지 않고 상하좌우만 버튼 배치 */
 
@@ -31,6 +38,13 @@ button {
     color: white;
     cursor: pointer;
 }
+
+#my {
+    width: 120px;
+    height: 120px;
+    font-size: 2em;
+}
+
 
 button:hover {
     background-color: #2980b9;
@@ -59,6 +73,10 @@ button:disabled {
     grid-area: 3 / 2;
 }
 
+#join-btn {
+    height: 30px;
+}
+
 .button-container {
     display: flex;
     flex-direction: row;
@@ -79,4 +97,12 @@ input[type="range"] {
     height: 6px;
     border-radius: 3px;
     outline: none;
-  }
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    align-items: center;
+}
