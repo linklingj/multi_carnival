@@ -7,7 +7,7 @@ const username = document.getElementById('welcome').dataset.username;
 const role = document.getElementById('role').dataset.role;
 
 const socket = io({
-    query: {user_name: username}
+    query: {user_name: username, role: role}
 });
 
 let canPress = true;
