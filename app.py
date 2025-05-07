@@ -25,10 +25,11 @@ def index():
 @socketio.on('connect')
 def handle_connect():
     user_name = request.args.get('user_name', 'anonymous')
+    role = request.args.get('role', 'unity')
     if user_name == "UNITY":
         return
     sid = request.sid
-    clients[sid] = {'user_name': user_name}
+    clients[sid] = {'user_name': user_name, 'role': role}
 
     print(f"Client Connected: {user_name}")
 
