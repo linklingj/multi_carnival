@@ -12,8 +12,6 @@
 ### 플레이 화면 이미지
 ![image1](./other/game1.png)
 ![image2](./other/game2.png)
-![image3](./other/client1.png)
-![image4](./other/client2.png)
 
 
 ### 사용 기술 스택
